@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
         btn_Clear.setOnClickListener {
             text_calc.setText("")
+            text_info.text = ""
         }
         btn_Equal.setOnClickListener {
             try {
@@ -81,6 +82,18 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("text_info", text_info.text.toString())
+        outState.putString("text_calc", text_calc.text.toString())
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        text_info.text = savedInstanceState.getString("text_info")
+        text_calc.setText(savedInstanceState.getString("text_calc"))
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
 
